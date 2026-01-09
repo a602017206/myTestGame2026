@@ -1,0 +1,74 @@
+{
+  "baseWeights": {
+    "wood": 1.0,
+    "fire": 1.0,
+    "earth": 1.0,
+    "metal": 1.0,
+    "water": 1.0
+  },
+  "terrainWeights": [
+    {
+      "terrainTag": "mountain",
+      "weights": { "earth": 1.2, "metal": 0.6 }
+    },
+    {
+      "terrainTag": "forest",
+      "weights": { "wood": 1.2, "water": 0.4 }
+    },
+    {
+      "terrainTag": "coast",
+      "weights": { "water": 1.2, "metal": 0.3 }
+    }
+  ],
+  "solarTermModifiers": [
+    {
+      "solarTerm": "春分",
+      "weightsDelta": { "wood": 0.6, "fire": 0.2 }
+    },
+    {
+      "solarTerm": "夏至",
+      "weightsDelta": { "fire": 0.8, "earth": 0.2 }
+    },
+    {
+      "solarTerm": "秋分",
+      "weightsDelta": { "metal": 0.6, "earth": 0.3 }
+    },
+    {
+      "solarTerm": "冬至",
+      "weightsDelta": { "water": 0.8, "metal": 0.2 }
+    }
+  ],
+  "yinYangModifiers": [
+    {
+      "phase": 0,
+      "weightsDelta": { "fire": 0.2, "wood": 0.1 }
+    },
+    {
+      "phase": 1,
+      "weightsDelta": { "water": 0.2, "metal": 0.1 }
+    }
+  ],
+  "specialAttributeTriggers": [
+    {
+      "attributeName": "灵感",
+      "baseProbability": 0.08,
+      "associatedElement": 0,
+      "bonusIfPrimaryMatches": 0.05,
+      "bonusIfSecondaryMatches": 0.02
+    },
+    {
+      "attributeName": "炽热",
+      "baseProbability": 0.06,
+      "associatedElement": 1,
+      "bonusIfPrimaryMatches": 0.05,
+      "bonusIfSecondaryMatches": 0.02
+    },
+    {
+      "attributeName": "沉稳",
+      "baseProbability": 0.05,
+      "associatedElement": 2,
+      "bonusIfPrimaryMatches": 0.04,
+      "bonusIfSecondaryMatches": 0.02
+    }
+  ]
+}
