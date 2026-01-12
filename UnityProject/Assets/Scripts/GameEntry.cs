@@ -1,3 +1,4 @@
+using Core;
 using Data;
 using Gameplay;
 using UnityEngine;
@@ -21,13 +22,25 @@ public class GameEntry : MonoBehaviour
     [SerializeField] private string virtualTerrainTag;
     [SerializeField] private string travelMemoryTag;
 
+    private GameStateMachine stateMachine;
+
     private void Awake()
     {
         Debug.Log("GameEntry initialized");
-        GenerateAndStoreAffinity();
+        InitializeStateMachine();
     }
 
-    private void GenerateAndStoreAffinity()
+    private void Start()
+    {
+        stateMachine.Start<BootState>();
+    }
+
+    private void Update()
+    {
+        stateMachine.Tick();
+    }
+
+    public void GenerateAndStoreAffinity()
     {
         var input = new ElementalAffinityInput
         {
@@ -53,5 +66,13 @@ public class GameEntry : MonoBehaviour
         {
             playerProfile.ApplyAffinity(result, input);
         }
+    }
+
+    private void InitializeStateMachine()
+    {
+        stateMachine = new GameStateMachine();
+        stateMachine.Register(new BootState(stateMachine));
+        stateMachine.Register(new GenerateProfileState(this, stateMachine));
+        stateMachine.Register(new MainMenuState(playerProfile));
     }
 }
