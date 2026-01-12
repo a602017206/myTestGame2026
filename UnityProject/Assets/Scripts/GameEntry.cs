@@ -1,6 +1,7 @@
 using Core;
 using Data;
 using Gameplay;
+using Networking;
 using UnityEngine;
 
 public class GameEntry : MonoBehaviour
@@ -22,11 +23,14 @@ public class GameEntry : MonoBehaviour
     [SerializeField] private string virtualTerrainTag;
     [SerializeField] private string travelMemoryTag;
 
+    private EventBus eventBus;
+    private ILanSession lanSession;
     private GameStateMachine stateMachine;
 
     private void Awake()
     {
         Debug.Log("GameEntry initialized");
+        InitializeServices();
         InitializeStateMachine();
     }
 
@@ -66,6 +70,12 @@ public class GameEntry : MonoBehaviour
         {
             playerProfile.ApplyAffinity(result, input);
         }
+    }
+
+    private void InitializeServices()
+    {
+        eventBus = new EventBus();
+        lanSession = new LanSessionStub();
     }
 
     private void InitializeStateMachine()
