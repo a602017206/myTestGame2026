@@ -11,6 +11,9 @@ public class GameEntry : MonoBehaviour
     [SerializeField] private TextAsset weightsConfigJson;
     [SerializeField] private PlayerProfile playerProfile;
 
+    [Header("Scene Setup")]
+    [SerializeField] private bool buildDemoScene = true;
+
     [Header("Location Input")]
     [SerializeField, Range(-90f, 90f)] private float latitude;
     [SerializeField, Range(-180f, 180f)] private float longitude;
@@ -32,6 +35,11 @@ public class GameEntry : MonoBehaviour
         Debug.Log("GameEntry initialized");
         InitializeServices();
         InitializeStateMachine();
+
+        if (buildDemoScene)
+        {
+            WorldBuilder.Build();
+        }
     }
 
     private void Start()
